@@ -3,6 +3,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+input[type="text"] {
+    font-size:16px;
+}
+
 a {
   color: #00B7FF;
 }
