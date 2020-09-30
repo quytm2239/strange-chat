@@ -23,9 +23,11 @@ $(function () {
     console.log(date);
     var suffix = myName === msg.username ? '(You)' : ''
     $('#messages').append($('<li>').html(date + ': ' + '<b>' +  msg.username + suffix + '</b>' + ' just talk: ' + '<b>' + msg.message + '</b>'));
+    $('#messages').scrollTop($('#messages').height());
   });
   socket.on('join_chat', function(msg){
     var suffix = myName === msg.username ? '(You)' : ''
     $('#messages').append($('<li>').html('<b>' + msg.username + suffix + '</b>' + ' has joined chat. Online user: ' + msg.total_online));
+    $('#messages').scrollTop($('#messages').height());
   });
 });
