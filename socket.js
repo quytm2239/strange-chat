@@ -1,5 +1,19 @@
 var common_room = 69;
-var items = ["Iron Man", "Caption America", "Black Widow", "Hulk", "Hawkeye", "Vision", "Thor", "Loki", "Scarlet Witch", "Dr Strange", "Thanos", "Black Panther"]
+var items = [
+    ["Iron Man", "/images/avatar/iron_man.webp"],
+    ["Caption America", "/images/avatar/caption_america.webp"],
+    ["Black Widow", "/images/avatar/black_widow.webp"],
+    ["Hulk", "/images/avatar/hulk.webp"],
+    ["Hawkeye", "/images/avatar/hawkeye.webp"],
+    ["Vision", "/images/avatar/vision.webp"],
+    ["Thor", "/images/avatar/thor.webp"],
+    ["Loki", "/images/avatar/loki.webp"],
+    ["Scarlet Witch", "/images/avatar/scarlet_witch.webp"],
+    ["Quick Silver", "/images/avatar/quick_silver.webp"],
+    ["Dr Strange", "/images/avatar/dr_strange.webp"],
+    ["Thanos", "/images/avatar/thanos.webp"],
+    ["Black Panther", "/images/avatar/black_panther.webp"]
+ ]
 
 module.exports = function(io) {
     console.log('->*<3- [SOCKETCHAT is LOADED] ->*<3-');
@@ -10,20 +24,22 @@ module.exports = function(io) {
         var suffix = '' + (Math.floor(Math.random() * 1000) + 1000);
         var item = items[Math.floor(Math.random() * items.length)];
 
-        socket.username = item + '@' + suffix;
+        socket.username = item[0] + '@' + suffix;
         socket.room = common_room;
+        socket.avatar = item[1];
         socket.join(common_room);
 
         var room = io.sockets.adapter.rooms[common_room];
 
         var jsonData = {
             room : common_room,
-            username : item + '@' + suffix,
+            username : socket.username,
+            avatar: socket.avatar,
             total_online : room.length
         };
 
         socket.emit('your_info', jsonData);
-        
+
         io.sockets["in"](socket.room).emit('join_chat', jsonData);
 
         // socket.on('join_chat', function (data) {
@@ -50,9 +66,10 @@ module.exports = function(io) {
             var mSecondsTime = new Date().getTime();
 
             var jsonData = {
-                username: socket.username,
-                message: data,
-                time: mSecondsTime
+              username : socket.username,
+              avatar: socket.avatar,
+              message: data,
+              time: mSecondsTime
             };
 
             io.sockets["in"](socket.room).emit('new_message', jsonData);
