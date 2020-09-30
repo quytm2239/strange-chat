@@ -7,6 +7,18 @@ Date.prototype.ddmmhhmm = function() {
   return ((dd > 9 ? '' : '0') + dd) + '/' + ((mm > 9 ? '' : '0') + mm) + ' ' + ((hh > 9 ? '' : '0') + hh) + ':' + ((min > 9 ? '' : '0') + min)
 };
 var myName = '';
+var messHtml = '<div class="media-left">' +
+                    '<img src="{avatar}" class="img-circle img-sm" alt="Profile Picture">' +
+                  '</div>' +
+                  '<div class="media-body pad-hor">' +
+                    '<div class="speech">' +
+                      '<a href="#" class="media-heading">{username}</a>' +
+                      '<p>{message}</p>' +
+                      '<p class="speech-time">' +
+                        '<i class="fa fa-clock-o fa-fw"></i> {time}' +
+                      '</p>' +
+                    '</div>' +
+                  '</div>';
 $(function () {
   var socket = io();
   $('form').submit(function(e) {
@@ -20,14 +32,17 @@ $(function () {
   });
   socket.on('new_message', function(msg){
     var date = new Date(msg.time).ddmmhhmm();
-    console.log(date);
     var suffix = myName === msg.username ? '(You)' : ''
-    $('#messages').append($('<li>').html(date + ': ' + '<b>' +  msg.username + suffix + '</b>' + ' just talk: ' + '<b>' + msg.message + '</b>'));
-    $('body').scrollTop($('#messages').height());
+    var res = messHtml.replace("{username}", msg.username + suffix);
+    res = res.replace("{message}", msg.message);
+    res = res.replace("{avatar}", msg.avatar);
+    res = res.replace("{time}", date);
+    $('#messages').append($('<li class="mar-btm">').html(res));
+    $('#messages-container').animate({scrollTop: $('#messages').prop("scrollHeight")}, 100);
   });
   socket.on('join_chat', function(msg){
     var suffix = myName === msg.username ? '(You)' : ''
-    $('#messages').append($('<li>').html('<b>' + msg.username + suffix + '</b>' + ' has joined chat. Online user: ' + msg.total_online));
-    $('#body').scrollTop($('#messages').height());
+    $('#messages').append($('<li class="mar-btm">').html('<b>' + msg.username + suffix + '</b>' + ' has joined chat.</br>Online user: ' + msg.total_online));
+    $('#messages-container').animate({scrollTop: $('#messages').prop("scrollHeight")}, 100);
   });
 });

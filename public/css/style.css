@@ -2,6 +2,7 @@ body {
   margin-top: 20px;
   background: #ebeef0;
 }
+p, li.mar-btm { word-break: break-all }
 
 .panel {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.075);
@@ -68,6 +69,10 @@ body {
   padding: 15px;
 }
 
+li.mar-btm {
+  color: gray;
+}
+
 .mar-btm {
   margin-bottom: 15px;
 }
@@ -96,7 +101,7 @@ body {
 .speech {
   position: relative;
   background: #b7dcfe;
-  color: #317787;
+  color: #05414f;;
   display: inline-block;
   border-radius: 0;
   padding: 12px 20px;
@@ -179,7 +184,7 @@ body {
   padding: 6px 12px;
   border-radius: 0;
   border: 1px solid 0;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.42857;
   vertical-align: middle;
   -webkit-transition: all .25s;
@@ -187,7 +192,7 @@ body {
 }
 
 .form-control {
-  font-size: 11px;
+  font-size: 14px;
   height: 100%;
   border-radius: 0;
   box-shadow: none;
