@@ -25,7 +25,7 @@ router.post('/check-age', function(req, res) {
       error: 'Year is not valid, Try again! You need to be 16+ to use this app!'
     })
   }
-  if (a > 2004) {
+  if (a < 1900 || a > 2004) {
     return res.status(400).send({
       success: false,
       error: 'Year is not valid, Try again! You need to be 16+ to use this app!'
