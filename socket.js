@@ -66,6 +66,7 @@ module.exports = function(io) {
             var mSecondsTime = new Date().getTime();
 
             var jsonData = {
+              id : Math.floor(Math.random() * 1000000),
               username : socket.username,
               avatar: socket.avatar,
               message: data,
