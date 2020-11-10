@@ -15,20 +15,20 @@ router.post('/check-age', function(req, res) {
   if (year == null || year == undefined || year.length == 0) {
     return res.status(400).send({
       success: false,
-      error: 'Year is not valid, Try again!\nYour age required to be 16-120 to use this app!'
+      error: 'Year is not valid, Try again!\nYour age required to be 16-80 to use this app!'
     })
   }
   var a = parseInt(year)
   if (a == null) {
     return res.status(400).send({
       success: false,
-      error: 'Year is not valid, Try again!\nYour age required to be 16-120 to use this app!'
+      error: 'Year is not valid, Try again!\nYour age required to be 16-80 to use this app!'
     })
   }
   if (a < 1940 || a > 2004) {
     return res.status(400).send({
       success: false,
-      error: 'Year is not valid, Try again!\nYour age required to be 16-120 to use this app!'
+      error: 'Year is not valid, Try again!\nYour age required to be 16-80 to use this app!'
     })
   }
   return res.status(200).send({
